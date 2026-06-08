@@ -6,6 +6,8 @@ import logout from "./auth/logout.js";
 
 import { updateAuthUI } from "./auth/authUI.js";
 
+import { hitAlbums } from "./albums/albumApi.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   modal();
 
@@ -16,4 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   logout();
 
   updateAuthUI();
+
+  hitAlbums();
 });

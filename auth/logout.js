@@ -3,7 +3,6 @@ import { updateAuthUI } from "./authUI.js";
 
 export default function logout() {
   const logoutBtn = document.querySelector("#logoutBtn");
-
   const userDropdown = document.querySelector("#userDropdown");
 
   logoutBtn.addEventListener("click", async () => {
@@ -15,9 +14,7 @@ export default function logout() {
       console.log(error);
     } finally {
       localStorage.clear();
-
       updateAuthUI();
-
       userDropdown.classList.remove("show");
     }
   });
