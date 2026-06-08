@@ -1,15 +1,12 @@
 export function renderPopularArt(artists) {
   const artistsGrid = document.querySelector(".artists-grid");
 
-  // Xóa dữ liệu cũ
   artistsGrid.replaceChildren();
 
   artists.forEach((artist) => {
-    // Card
     const artistCard = document.createElement("div");
     artistCard.className = "artist-card";
 
-    // Cover
     const artistCardCover = document.createElement("div");
     artistCardCover.className = "artist-card-cover";
 
@@ -26,7 +23,6 @@ export function renderPopularArt(artists) {
     artistPlayBtn.appendChild(playIcon);
     artistCardCover.append(artistImage, artistPlayBtn);
 
-    // Info
     const artistCardInfo = document.createElement("div");
     artistCardInfo.className = "artist-card-info";
 
