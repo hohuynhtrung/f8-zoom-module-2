@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F8-zoom-module-2</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="layout.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class="fa-brands fa-spotify"></i>
+          </div>
+        </div>
+
+        <div class="sidebar-nav">
+          <div class="nav-section">
+            <h2 class="section-title">Your Library</h2>
+            <button class="create-btn">
+              <i class="fa-solid fa-plus"></i> Create
+            </button>
+          </div>
+
+          <div class="nav-tabs">
+            <button class="tab-btn active">Playlists</button>
+            <button class="tab-btn">Artists</button>
+          </div>
+
+          <div class="search-library">
+            <button class="search-library-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button class="sort-btn">
+              Recents
+              <i class="fa-solid fa-list"></i>
+            </button>
+          </div>
+
+          <div class="library-content">
+            <div class="library-item active">
+              <div class="item-icon liked-songs">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="item-info">
+                <div class="item-title">Liked Songs</div>
+                <div class="item-subtitle">
+                  <i class="fas fa-thumbtack"></i>
+                  Playlist • 3 songs
+                </div>
+              </div>
+            </div>
+
+            <div class="library-item">
+              <img src="placeholder.svg" alt="Đen" class="item-image" />
+              <div class="item-info">
+                <div class="item-title">Đen</div>
+                <div class="item-subtitle">Artist</div>
+              </div>
+            </div>
+
+            <div class="library-item">
+              <img src="placeholder.svg" alt="Trúc Nhân" class="item-image" />
+              <div class="item-info">
+                <div class="item-title">Trúc Nhân</div>
+                <div class="item-subtitle">Artist</div>
+              </div>
+            </div>
+
+            <div class="library-item">
+              <img src="placeholder.svg" alt="24.03" class="item-image" />
+              <div class="item-info">
+                <div class="item-title">24.03</div>
+                <div class="item-subtitle">Playlist • Han</div>
+              </div>
+            </div>
+
+            <div class="library-item">
+              <img src="placeholder.svg" alt="Thùy Chi" class="item-image" />
+              <div class="item-info">
+                <div class="item-title">Thùy Chi</div>
+                <div class="item-subtitle">Artist</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- main content -->
+      <main class="main-content">
+        <header class="main-header">
+          <!-- search header -->
+          <div class="search-header">
+            <button class="home-btn"><i class="fa-solid fa-house"></i></button>
+            <div class="search-header-input">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                placeholder="What do you want to play?"
+                class="search-input"
+              />
+            </div>
+          </div>
+
+          <!-- user header -->
+          <div class="user-header">
+            <div class="auth-buttons">
+              <button class="signup-btn">Sign up</button>
+              <button class="login-btn">Log in</button>
+            </div>
+            <div class="user-menu">
+              <button class="user-info" id="userInfo" style="display: none">
+                <span class="user-name-info"></span>
+                <img src="./placeholder.svg" alt="" class="user-avatar-info" />
+              </button>
+              <div class="user-dropdown" id="userDropdown">
+                <div class="dropdown-item" id="logoutBtn">
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  <span>Log out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="main-wapper">
+          <!-- Today's biggest hits section -->
+          <div class="hits-section">
+            <h3 class="section-heading">Today's biggest hits</h3>
+            <div class="hits-grid">
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- hit card -->
+              <div class="hit-card">
+                <div class="hit-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="hit-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="hit-card-info">
+                  <div class="hit-card-title">Lối nhỏ</div>
+                  <div class="hit-card-artist">Đen Vâu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popular artists section -->
+          <div class="artists-section">
+            <h3 class="section-heading">Popular artists</h3>
+            <div class="artists-grid">
+              <!-- Card artists -->
+              <div class="artist-card">
+                <div class="artist-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="artist-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="artist-card-info">
+                  <div class="artist-card-name">Lối nhỏ</div>
+                  <div class="artist-card-type">Đen Vâu</div>
+                </div>
+              </div>
+
+              <!-- Card artists -->
+              <div class="artist-card">
+                <div class="artist-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="artist-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="artist-card-info">
+                  <div class="artist-card-name">Lối nhỏ</div>
+                  <div class="artist-card-type">Đen Vâu</div>
+                </div>
+              </div>
+              <!-- Card artists -->
+              <div class="artist-card">
+                <div class="artist-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="artist-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="artist-card-info">
+                  <div class="artist-card-name">Lối nhỏ</div>
+                  <div class="artist-card-type">Đen Vâu</div>
+                </div>
+              </div>
+              <!-- Card artists -->
+              <div class="artist-card">
+                <div class="artist-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="artist-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="artist-card-info">
+                  <div class="artist-card-name">Lối nhỏ</div>
+                  <div class="artist-card-type">Đen Vâu</div>
+                </div>
+              </div>
+              <!-- Card artists -->
+              <div class="artist-card">
+                <div class="artist-card-cover">
+                  <img src="./placeholder.svg" alt="" />
+                  <button class="artist-play-btn">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="artist-card-info">
+                  <div class="artist-card-name">Lối nhỏ</div>
+                  <div class="artist-card-type">Đen Vâu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero artists section -->
+          <div class="artists-hero">
+            <div class="hero-background">
+              <img src="./placeholder.svg" alt="" />
+              <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content">
+              <div class="verified-badge">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Verified Artist</span>
+              </div>
+              <div class="artist-name">Den</div>
+              <div class="monthly-listeners">1,021,833 monthly listeners</div>
+            </div>
+          </div>
+
+          <!-- Control section -->
+          <div class="control-section">
+            <button class="play-btn-large">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+
+          <!-- Music section -->
+          <div class="music-section">
+            <h3 class="section-heading">Popular</h3>
+            <div class="music-list">
+              <!-- Item music -->
+              <div class="music-item">
+                <div class="music-number">1</div>
+                <div class="music-img">
+                  <img src="./placeholder.svg" alt="" />
+                </div>
+                <div class="music-info">Cho Tôi Lang Thang</div>
+                <div class="music-plays">27,498,341</div>
+                <div class="music-duration">4:27</div>
+                <button class="music-menu">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+
+              <!-- Item music -->
+              <div class="music-item">
+                <div class="music-number">1</div>
+                <div class="music-img">
+                  <img src="./placeholder.svg" alt="" />
+                </div>
+                <div class="music-info">Cho Tôi Lang Thang</div>
+                <div class="music-plays">27,498,341</div>
+                <div class="music-duration">4:27</div>
+                <button class="music-menu">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+
+              <!-- Item music -->
+              <div class="music-item">
+                <div class="music-number">1</div>
+                <div class="music-img">
+                  <img src="./placeholder.svg" alt="" />
+                </div>
+                <div class="music-info">Cho Tôi Lang Thang</div>
+                <div class="music-plays">27,498,341</div>
+                <div class="music-duration">4:27</div>
+                <button class="music-menu">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- footer player -->
+      <footer class="player">
+        <div class="player-left">
+          <img src="./placeholder.svg" alt="" class="player-img" />
+          <div class="player-info">
+            <div class="player-title">Yêu Một Người Sao Buồn Đến Thế</div>
+            <div class="player-artist">Noo Phước Thịnh</div>
+          </div>
+          <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="player-center">
+          <div class="player-controls">
+            <div class="control-btn"><i class="fa-solid fa-shuffle"></i></div>
+            <div class="control-btn">
+              <i class="fa-solid fa-backward-fast"></i>
+            </div>
+            <div class="control-btn play-btn">
+              <i class="fa-solid fa-pause"></i>
+            </div>
+            <div class="control-btn">
+              <i class="fa-solid fa-forward-fast"></i>
+            </div>
+            <div class="control-btn">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </div>
+          </div>
+          <div class="progress-container">
+            <span class="time">00:00</span>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 20%"></div>
+              <div class="progress-handle"></div>
+            </div>
+            <span class="time">4:37</span>
+          </div>
+        </div>
+        <div class="player-right">
+          <button class="mic-btn">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <div class="volume-control">
+            <button class="volume-btn">
+              <i class="fa-solid fa-volume-high"></i>
+            </button>
+            <div class="volume-bar">
+              <div class="volume-fill"></div>
+              <div class="volume-handle"></div>
+            </div>
+          </div>
+          <button class="expand-btn">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+      <div class="modal-container">
+        <button class="modal-close" id="modalClose">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-content">
+          <div class="modal-logo">
+            <i class="fa-brands fa-spotify"></i>
+          </div>
+
+          <!-- Sign Up Form -->
+          <div class="auth-form" id="signupForm">
+            <h1 class="modal-heading">Sign up to start listening</h1>
+
+            <form class="auth-form-content">
+              <div class="form-group">
+                <input
+                  type="name"
+                  placeholder="Your name"
+                  class="form-input"
+                  id="userName"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  class="form-input"
+                  id="signupEmail"
+                />
+                <div class="error-message">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Please enter a valid email address</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="form-input"
+                  id="signupPassword"
+                />
+                <div class="error-message">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Password must be at least 8 characters</span>
+                </div>
+              </div>
+
+              <button type="submit" class="auth-submit-btn">Sign Up</button>
+            </form>
+
+            <div class="auth-switch">
+              <span>Already have an account? </span>
+              <button class="auth-link" id="textShowLogin">Log in here</button>
+            </div>
+
+            <div id="signupMess" class="success-message"></div>
+          </div>
+
+          <!-- Login Form -->
+          <div class="auth-form" id="loginForm" style="display: none">
+            <h1 class="modal-heading">Log in to Spotify</h1>
+
+            <form class="auth-form-content">
+              <div class="form-group">
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  class="form-input"
+                  id="loginEmail"
+                />
+                <div class="error-message">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Please enter a valid email address</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="form-input"
+                  id="loginPassword"
+                />
+                <div class="error-message">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Please enter your password</span>
+                </div>
+              </div>
+
+              <button type="submit" class="auth-submit-btn">Log In</button>
+            </form>
+
+            <div class="auth-switch">
+              <span>Don't have an account? </span>
+              <button class="auth-link" id="textShowSignup">
+                Sign up here
+              </button>
+            </div>
+            <div id="loginMess" class="success-message"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
