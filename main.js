@@ -6,7 +6,7 @@ import logout from "./auth/logout.js";
 
 import { updateAuthUI } from "./auth/authUI.js";
 
-import { hitAlbums } from "./albums/albumApi.js";
+import { biggestHits, popularArtists } from "./albums/api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   modal();
@@ -19,5 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateAuthUI();
 
-  hitAlbums();
+  biggestHits();
+  popularArtists();
 });
