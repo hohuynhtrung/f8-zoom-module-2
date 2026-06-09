@@ -11,3 +11,11 @@ export function fetchArtistById(artistId) {
 export function fetchArtistPopularTracks(artistId) {
   return httpRequest.get(`artists/${artistId}/tracks/popular`);
 }
+
+export function followArtist(artistId) {
+  return httpRequest.post(`artists/${artistId}/follow`);
+}
+
+export function unfollowArtist(artistId) {
+  return httpRequest.del(`artists/${artistId}/follow`);
+}

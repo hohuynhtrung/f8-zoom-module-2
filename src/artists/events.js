@@ -1,10 +1,17 @@
-import { fetchArtistById, fetchArtistPopularTracks } from "../api/artistApi.js";
+import {
+  fetchArtistById,
+  fetchArtistPopularTracks,
+  followArtist,
+  unfollowArtist,
+} from "../api/artistApi.js";
 import { renderArtistDetail } from "./renderArtistDetail.js";
 import { renderArtistPopularTracks } from "./renderArtistPopularTracks.js";
 import { showDetailContent } from "../ui/veiws.js";
 
 export default function initArtistEvents() {
   const artistsGrid = document.querySelector(".artists-grid");
+  const followBtn = document.querySelector(".follow-btn");
+
   if (!artistsGrid) return;
 
   artistsGrid.addEventListener("click", async (e) => {
@@ -23,6 +30,28 @@ export default function initArtistEvents() {
       renderArtistPopularTracks(popularTracks.tracks);
 
       showDetailContent();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  followBtn.addEventListener("click", async (e) => {
+    const artistId = followBtn.dataset.artistId;
+
+    if (!artistId) return;
+
+    const isFollowing = followBtn.dataset.following === "true";
+
+    try {
+      if (isFollowing) {
+        await followArtist(artistId);
+        followBtn.dataset.following = "false";
+        followBtn.textContent = "Follow";
+      } else {
+        await followArtist(artistId);
+        followBtn.dataset.following = "true";
+        followBtn.textContent = "Following";
+      }
     } catch (error) {
       console.log(error);
     }

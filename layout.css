@@ -756,6 +756,23 @@ button {
   margin-left: 2px;
 }
 
+.follow-btn {
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #1db954;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.follow-btn:hover {
+  border: 1px solid #1ed760;
+  transform: scale(1.04);
+}
+
 /* Music section */
 .music-section {
   margin-bottom: var(--spacing-2xl);
@@ -841,6 +858,174 @@ button {
 
 .music-item:hover .music-menu {
   opacity: 1;
+}
+
+/* Play list */
+.playlist-content {
+  background: transparent;
+  padding: 24px;
+}
+
+.playlist-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+/* Ô chọn ảnh bên trái */
+.image-selector {
+  width: 180px;
+  height: 180px;
+  background-color: #282828;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.image-selector:hover {
+  background-color: #3e3e3e;
+}
+
+.image-selector i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #b3b3b3;
+}
+
+.image-selector span {
+  font-size: 0.85rem;
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+/* Thông tin chữ bên phải */
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playlist-type {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.playlist-title {
+  font-size: var(--spacing-2xl);
+  color: var(--text-white);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 4px 0;
+}
+
+.playlist-owner {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #b3b3b3;
+}
+
+/* Thanh công cụ */
+.playlist-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.view-status {
+  font-size: 0.85rem;
+  color: #b3b3b3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.view-status:hover {
+  color: #ffffff;
+}
+
+/* Đường gạch ngang phân cách */
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #282828;
+  margin-bottom: 24px;
+}
+
+/* Phần tìm kiếm bài hát */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-header h2 {
+  color: var(--text-white);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+}
+
+/* Thanh nhập liệu tìm kiếm */
+.search-bar-wrapper {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b3b3b3;
+  font-size: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  background-color: #2a2a2a;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #757575;
+}
+
+.search-input:focus {
+  background-color: #3e3e3e;
 }
 
 /* Footer player */
