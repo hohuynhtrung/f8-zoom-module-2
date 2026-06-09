@@ -1,10 +1,5 @@
 import { createMediaCover } from "../utils/helpers.js";
 
-/**
- * renderHits.js - Chỉ chứa logic render DOM cho section Today's biggest hits
- * Không gọi API, không gắn event listener
- */
-
 export function renderHitAlbums(hits) {
   const hitGrid = document.querySelector(".hits-grid");
   hitGrid.replaceChildren();
@@ -12,6 +7,7 @@ export function renderHitAlbums(hits) {
   hits.forEach((hit) => {
     const hitCard = document.createElement("div");
     hitCard.className = "hit-card";
+    hitCard.dataset.id = hit.id;
 
     const hitCover = createMediaCover(
       "hit-card-cover",
