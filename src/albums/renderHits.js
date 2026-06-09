@@ -1,28 +1,24 @@
+import { createMediaCover } from "../utils/helpers.js";
+
+/**
+ * renderHits.js - Chỉ chứa logic render DOM cho section Today's biggest hits
+ * Không gọi API, không gắn event listener
+ */
+
 export function renderHitAlbums(hits) {
   const hitGrid = document.querySelector(".hits-grid");
-
   hitGrid.replaceChildren();
 
   hits.forEach((hit) => {
     const hitCard = document.createElement("div");
     hitCard.className = "hit-card";
 
-    const hitCover = document.createElement("div");
-    hitCover.className = "hit-card-cover";
-
-    const hitImg = document.createElement("img");
-    hitImg.src = hit.cover_image_url;
-    hitImg.alt = hit.title;
-
-    const hitPlay = document.createElement("button");
-    hitPlay.className = "hit-play-btn";
-
-    const hitIconPlay = document.createElement("i");
-    hitIconPlay.className = "fa-solid fa-play";
-
-    hitPlay.appendChild(hitIconPlay);
-
-    hitCover.append(hitImg, hitPlay);
+    const hitCover = createMediaCover(
+      "hit-card-cover",
+      hit.cover_image_url,
+      hit.title,
+      "hit-play-btn",
+    );
 
     const hitInfo = document.createElement("div");
     hitInfo.className = "hit-card-info";
@@ -36,9 +32,7 @@ export function renderHitAlbums(hits) {
     hitArtist.textContent = hit.artist_name;
 
     hitInfo.append(hitTitle, hitArtist);
-
     hitCard.append(hitCover, hitInfo);
-
     hitGrid.appendChild(hitCard);
   });
 }

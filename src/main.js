@@ -1,24 +1,19 @@
-import modal from "./ui/modal.js";
-
+import initModal from "./ui/modal.js";
+import initDropdown from "./ui/dropdown.js";
 import register from "./auth/register.js";
 import login from "./auth/login.js";
 import logout from "./auth/logout.js";
-
 import { updateAuthUI } from "./auth/authUI.js";
-
-import { biggestHits, popularArtists } from "./albums/api.js";
+import initAlbums from "./albums/index.js";
+import initArtists from "./artists/index.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  modal();
-
+  initModal();
+  initDropdown();
   register();
-
   login();
-
   logout();
-
   updateAuthUI();
-
-  biggestHits();
-  popularArtists();
+  initAlbums();
+  initArtists();
 });
