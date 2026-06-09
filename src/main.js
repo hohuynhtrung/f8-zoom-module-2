@@ -7,7 +7,8 @@ import { updateAuthUI } from "./auth/authUI.js";
 import initAlbums from "./albums/index.js";
 import initArtists from "./artists/index.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (e) => {
+  e.preventDefault();
   initModal();
   initDropdown();
   register();

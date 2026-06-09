@@ -55,6 +55,10 @@ button {
   border: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .app-container {
   display: grid;
   grid-template-areas:

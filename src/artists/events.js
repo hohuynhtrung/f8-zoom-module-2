@@ -1,6 +1,7 @@
 import { fetchArtistById, fetchArtistPopularTracks } from "../api/artistApi.js";
 import { renderArtistDetail } from "./renderArtistDetail.js";
 import { renderArtistPopularTracks } from "./renderArtistPopularTracks.js";
+import { showDetailContent } from "../ui/veiws.js";
 
 export default function initArtistEvents() {
   const artistsGrid = document.querySelector(".artists-grid");
@@ -20,6 +21,8 @@ export default function initArtistEvents() {
       // popular tracks
       const popularTracks = await fetchArtistPopularTracks(artistId);
       renderArtistPopularTracks(popularTracks.tracks);
+
+      showDetailContent();
     } catch (error) {
       console.log(error);
     }
