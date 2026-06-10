@@ -1,5 +1,5 @@
 export function renderFollowingArtists(artists = []) {
-  const libraryList = document.querySelector(".library-content");
+  const libraryList = document.querySelector(".library-artists");
 
   if (!libraryList) return;
 

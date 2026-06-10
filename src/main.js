@@ -6,7 +6,7 @@ import logout from "./auth/logout.js";
 import { updateAuthUI } from "./auth/authUI.js";
 import initAlbums from "./albums/index.js";
 import initArtists from "./artists/index.js";
-import { showHomeContent } from "./ui/veiws.js";
+import { showHomeContent, showPlayListNav } from "./ui/veiws.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
   login();
   logout();
   updateAuthUI();
+
   showHomeContent();
+  showPlayListNav();
 
   initAlbums();
   initArtists();
