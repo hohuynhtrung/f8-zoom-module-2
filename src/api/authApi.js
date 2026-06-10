@@ -11,3 +11,7 @@ export function loginApi({ email, password }) {
 export function logoutApi(refreshToken) {
   return httpRequest.post("auth/logout", { refresh_token: refreshToken });
 }
+
+export function fetchFollowingArtists(limit = 20, offset = 0) {
+  return httpRequest.get(`me/following?limit=${limit}&offset=${offset}`);
+}

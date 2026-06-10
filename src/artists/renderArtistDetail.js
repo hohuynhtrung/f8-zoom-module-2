@@ -12,7 +12,9 @@ export function renderArtistDetail(artist) {
     : "none";
 
   const followBtn = document.querySelector(".follow-btn");
-  followBtn.dataset.artistId = artist.id;
-  followBtn.dataset.following = artist.is_following;
-  followBtn.textContent = artist.is_following ? "Following" : "Follow";
+  if (followBtn) {
+    followBtn.dataset.artistId = artist.id;
+    followBtn.dataset.following = artist.is_following ? "true" : "false";
+    followBtn.textContent = artist.is_following ? "Following" : "Follow";
+  }
 }
