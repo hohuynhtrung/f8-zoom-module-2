@@ -141,13 +141,12 @@
               </button>
               <button class="follow-btn">Follow</button>
             </div>
-
-            <!-- Music section -->
-            <div class="music-section">
-              <h3 class="section-heading">Popular</h3>
-              <div class="music-list">
-                <!-- Item music -->
-              </div>
+          </div>
+          <!-- Music section -->
+          <div class="music-section">
+            <h3 class="section-heading">Popular</h3>
+            <div class="music-list">
+              <!-- Item music -->
             </div>
           </div>
 
@@ -200,38 +199,45 @@
       <!-- footer player -->
       <footer class="player">
         <div class="player-left">
-          <img src="./placeholder.svg" alt="" class="player-img" />
+          <img src="./placeholder.svg" alt="Song Cover" class="player-img" />
           <div class="player-info">
-            <div class="player-title">Yêu Một Người Sao Buồn Đến Thế</div>
-            <div class="player-artist">Noo Phước Thịnh</div>
+            <div class="player-title">Chưa có bài hát</div>
+            <div class="player-artist">Nghệ sĩ</div>
           </div>
-          <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+          <button class="add-btn">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
+
         <div class="player-center">
           <div class="player-controls">
-            <div class="control-btn"><i class="fa-solid fa-shuffle"></i></div>
-            <div class="control-btn">
+            <div class="control-btn shuffle-btn">
+              <i class="fa-solid fa-shuffle"></i>
+            </div>
+            <div class="control-btn prev-btn">
               <i class="fa-solid fa-backward-fast"></i>
             </div>
-            <div class="control-btn play-btn">
-              <i class="fa-solid fa-pause"></i>
+            <div class="control-btn play-btn js-play-btn">
+              <i class="fa-solid fa-play"></i>
             </div>
-            <div class="control-btn">
+            <div class="control-btn next-btn">
               <i class="fa-solid fa-forward-fast"></i>
             </div>
-            <div class="control-btn">
+            <div class="control-btn repeat-btn">
               <i class="fa-solid fa-arrows-rotate"></i>
             </div>
           </div>
+
           <div class="progress-container">
-            <span class="time">00:00</span>
+            <span class="time current-time">00:00</span>
             <div class="progress-bar">
-              <div class="progress-fill" style="width: 20%"></div>
+              <div class="progress-fill"></div>
               <div class="progress-handle"></div>
             </div>
-            <span class="time">4:37</span>
+            <span class="time total-time">00:00</span>
           </div>
         </div>
+
         <div class="player-right">
           <button class="mic-btn">
             <i class="fa-solid fa-microphone"></i>

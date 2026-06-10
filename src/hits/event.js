@@ -1,11 +1,9 @@
-import { fetchHitById, fetchHitPopularTracks } from "../api/albumApi.js";
-import { renderHitDetail } from "./renderHitDetail.js";
-import { renderHitPopularTracks } from "./renderHitPopularTracks.js";
+import { fetchHitById } from "../api/hitApi.js";
 import { showDetailContent } from "../ui/veiws.js";
+import { renderHitDetail } from "./renderHitDetail.js";
 
-export default function initAlbumEvents() {
+export default function initHitEvent() {
   const hitsGrid = document.querySelector(".hits-grid");
-
   if (!hitsGrid) return;
 
   hitsGrid.addEventListener("click", async (e) => {
@@ -17,12 +15,9 @@ export default function initAlbumEvents() {
     try {
       const hit = await fetchHitById(hitId);
       renderHitDetail(hit);
-
-      const popularTracks = await fetchHitPopularTracks(hitId);
-      renderHitPopularTracks(popularTracks.tracks);
       showDetailContent();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   });
 }

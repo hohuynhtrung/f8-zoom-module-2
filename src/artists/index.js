@@ -23,6 +23,6 @@ export default async function initArtists() {
     // Gọi hàm load following lần đầu tiên khi mở trang
     await loadFollowingList();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

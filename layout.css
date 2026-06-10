@@ -1122,6 +1122,10 @@ button {
   cursor: pointer;
 }
 
+.control-btn.active i {
+  color: #1ed760;
+}
+
 .play-btn {
   width: 32px;
   height: 32px;

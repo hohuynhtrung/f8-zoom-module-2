@@ -4,8 +4,8 @@ import register from "./auth/register.js";
 import login from "./auth/login.js";
 import logout from "./auth/logout.js";
 import { updateAuthUI } from "./auth/authUI.js";
-import initAlbums from "./albums/index.js";
 import initArtists from "./artists/index.js";
+import initHits from "./hits/index.js";
 import { showHomeContent, showPlayListNav } from "./ui/veiws.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
@@ -20,6 +20,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
   showHomeContent();
   showPlayListNav();
 
-  initAlbums();
+  initHits();
   initArtists();
 });

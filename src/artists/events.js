@@ -22,6 +22,7 @@ export default function initArtistEvents() {
     const artistId = artistCard.dataset.id;
 
     try {
+      showDetailContent();
       // artist detail
       const artist = await fetchArtistById(artistId);
       renderArtistDetail(artist);
@@ -29,10 +30,8 @@ export default function initArtistEvents() {
       // popular tracks
       const popularTracks = await fetchArtistPopularTracks(artistId);
       renderArtistPopularTracks(popularTracks.tracks);
-
-      showDetailContent();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   });
 
