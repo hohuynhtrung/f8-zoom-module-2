@@ -146,20 +146,15 @@
           <!-- Play list -->
           <div class="playlist-content">
             <div class="playlist-header">
-              <div class="playlist-header-left">
-                <div class="image-selector">
-                  <i class="fa-solid fa-pencil"></i>
-                  <span>Choose photo</span>
-                </div>
+              <button class="image-selector" id="choose-photo-btn">
+                <i class="fa-solid fa-pencil"></i>
+                <span>Choose photo</span>
+              </button>
 
-                <div class="playlist-info">
-                  <span class="playlist-type">Public Playlist</span>
-                  <h1 class="playlist-title">My Playlist #3</h1>
-                  <span class="playlist-owner"></span>
-                </div>
-              </div>
-              <div class="playlist-header-right">
-                <button class="create-playlist">Create</button>
+              <div class="playlist-info">
+                <span class="playlist-type">Public Playlist</span>
+                <h1 class="playlist-title">My Playlist #3</h1>
+                <span class="playlist-owner"></span>
               </div>
             </div>
 
@@ -361,6 +356,48 @@
       </div>
     </div>
 
+    <!-- Modal playlist -->
+    <div id="edit-playlist-modal" class="playlist-modal-overlay">
+      <div class="playlist-modal-content">
+        <div class="playlist-modal-header-row">
+          <h2>Edit details</h2>
+          <button class="playlist-modal-close-btn">&times;</button>
+        </div>
+
+        <div class="playlist-modal-body-row">
+          <div class="playlist-modal-image-selector">
+            <i class="fa-solid fa-music music-placeholder-icon"></i>
+            <div class="hover-overlay">
+              <i class="fa-solid fa-pencil"></i>
+              <span>Choose photo</span>
+            </div>
+          </div>
+
+          <div class="playlist-modal-inputs">
+            <input
+              type="text"
+              id="playlist-modal-playlist-name"
+              placeholder="Add a name"
+              class="playlist-modal-input-field"
+            />
+            <textarea
+              id="playlist-modal-playlist-desc"
+              placeholder="Add an optional description"
+              class="playlist-modal-textarea-field"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="playlist-modal-footer-row">
+          <button class="playlist-modal-save-btn">Save</button>
+        </div>
+        <p class="playlist-modal-disclaimer">
+          By proceeding, you agree to give Spotify access to the image you
+          choose to upload. Please make sure you have the right to upload the
+          image.
+        </p>
+      </div>
+    </div>
     <script src="./src/main.js" type="module"></script>
   </body>
 </html>
