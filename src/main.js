@@ -7,6 +7,7 @@ import { updateAuthUI } from "./auth/authUI.js";
 import initArtists from "./artists/index.js";
 import initHits from "./hits/index.js";
 import { showHomeContent, showPlayListNav } from "./ui/veiws.js";
+import initPlaylist from "./playlists/index.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   initHits();
   initArtists();
+  initPlaylist();
 });

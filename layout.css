@@ -869,8 +869,14 @@ button {
 .playlist-header {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
   gap: 24px;
   margin-bottom: 24px;
+}
+
+.playlist-header-left {
+  display: flex;
+  align-items: flex-end;
 }
 
 /* Ô chọn ảnh bên trái */
@@ -926,22 +932,51 @@ button {
   margin: 4px 0;
 }
 
+.playlist-title[contenteditable="true"] {
+  border-bottom: 1px dashed #fff;
+  outline: none;
+  padding-bottom: 4px;
+}
+
+.create-playlist.is-editing {
+  background-color: #1ed760;
+  color: #000;
+}
+
 .playlist-owner {
   font-size: 0.85rem;
   font-weight: 700;
   color: #b3b3b3;
 }
 
+.create-playlist {
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid #1db954;
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.create-playlist:hover {
+  border: 1px solid #1ed760;
+  transform: scale(1.04);
+}
+
 /* Thanh công cụ */
 .playlist-toolbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
   padding: 10px 0;
 }
 
 .view-status {
-  font-size: 0.85rem;
+  background: transparent;
+  font-size: 16px;
   color: #b3b3b3;
   display: flex;
   align-items: center;
