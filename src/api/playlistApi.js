@@ -11,3 +11,7 @@ export function createPlaylistApi(data) {
 export function getPlaylistById(playlistId) {
   return httpRequest.get(`playlists/${playlistId}`);
 }
+
+export function deletePlaylistById(playlistId) {
+  return httpRequest.del(`playlists/${playlistId}`);
+}

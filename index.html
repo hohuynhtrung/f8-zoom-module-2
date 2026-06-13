@@ -399,6 +399,36 @@
         </p>
       </div>
     </div>
+
+    <!-- Modal confiem detele -->
+    <div id="delete-confirm-modal" class="playlist-modal-overlay hidden">
+      <div class="playlist-modal-content delete-modal-width">
+        <div class="playlist-modal-header-row">
+          <h2 id="delete-modal-title">Xóa mục này?</h2>
+          <button class="playlist-modal-close-btn" id="delete-modal-close">
+            &times;
+          </button>
+        </div>
+
+        <div class="playlist-modal-body-row">
+          <p id="delete-modal-message">
+            Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa không?
+          </p>
+        </div>
+
+        <div class="playlist-modal-footer-row delete-footer">
+          <button class="playlist-modal-cancel-btn" id="delete-modal-cancel">
+            Hủy
+          </button>
+          <button
+            class="playlist-modal-save-btn btn-danger"
+            id="delete-modal-confirm"
+          >
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
     <script src="./src/main.js" type="module"></script>
   </body>
 </html>

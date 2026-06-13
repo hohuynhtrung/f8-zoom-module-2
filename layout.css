@@ -227,7 +227,7 @@ button {
 }
 
 .library-item:hover {
-  background: var(--bg-hover);
+  background: #242222;
 }
 
 .liked-songs {
@@ -963,6 +963,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px 0;
 }
 
@@ -978,6 +979,22 @@ button {
 
 .view-status:hover {
   color: #ffffff;
+}
+
+.delete-playlist {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: var(--spacing-sm);
+  border-radius: 20px;
+  border: 2px solid rgb(171, 59, 59);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.delete-playlist:hover {
+  color: var(--text-white);
+  border: 2px solid rgb(203, 54, 54);
+  transform: scale(1.04);
 }
 
 .divider {
@@ -1547,4 +1564,34 @@ button {
   color: #aaa;
   margin-top: 12px;
   line-height: 1.4;
+}
+
+/* Modal confirm delete */
+.delete-modal-width {
+  max-width: 400px;
+}
+
+.delete-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.playlist-modal-cancel-btn {
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 12px 24px;
+}
+
+.btn-danger {
+  background-color: #e91429 !important;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #f15a6b !important;
+  transform: scale(1.04);
 }
