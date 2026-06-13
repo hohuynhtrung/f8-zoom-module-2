@@ -1546,10 +1546,14 @@ button {
   height: 100px;
   resize: none;
 }
+
 .playlist-modal-footer-row {
   display: flex;
   justify-content: flex-end;
+  justify-content: space-between;
 }
+
+.playlist-modal-public-btn,
 .playlist-modal-save-btn {
   background: #fff;
   color: #000;

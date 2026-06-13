@@ -373,7 +373,12 @@
               <span>Choose photo</span>
             </div>
           </div>
-
+          <input
+            type="file"
+            id="playlist-file-input"
+            accept="image/*"
+            style="display: none"
+          />
           <div class="playlist-modal-inputs">
             <input
               type="text"
@@ -390,6 +395,7 @@
         </div>
 
         <div class="playlist-modal-footer-row">
+          <button class="playlist-modal-public-btn">Make public</button>
           <button class="playlist-modal-save-btn">Save</button>
         </div>
         <p class="playlist-modal-disclaimer">

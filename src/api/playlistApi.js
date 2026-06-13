@@ -15,3 +15,7 @@ export function getPlaylistById(playlistId) {
 export function deletePlaylistById(playlistId) {
   return httpRequest.del(`playlists/${playlistId}`);
 }
+
+export function updatePlaylistById(playlistId, data) {
+  return httpRequest.put(`playlists/${playlistId}`, data);
+}
