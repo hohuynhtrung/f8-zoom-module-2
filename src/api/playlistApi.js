@@ -7,3 +7,7 @@ export function fetchPlaylist(limit = 20, offset = 0) {
 export function createPlaylistApi(data) {
   return httpRequest.post(`playlists`, data);
 }
+
+export function getPlaylistById(playlistId) {
+  return httpRequest.get(`playlists/${playlistId}`);
+}

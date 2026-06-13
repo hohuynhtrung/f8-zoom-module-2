@@ -1521,7 +1521,7 @@ button {
   background: #3e3e3e;
   border: none;
   padding: 10px;
-  color: #fff;
+  color: var(--text-white);
   border-radius: 4px;
   width: 100%;
 }
