@@ -931,6 +931,14 @@ button {
   padding-bottom: 4px;
 }
 
+.playlis-description {
+  font-size: var(--spacing-2xl);
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1;
+  margin: 4px 0;
+}
+
 .create-playlist.is-editing {
   background-color: #1ed760;
   color: #000;

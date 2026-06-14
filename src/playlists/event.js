@@ -19,6 +19,7 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
   const choosePhotoBtn = document.querySelector("#choose-photo-btn");
 
   const playListTitleElement = document.querySelector(".playlist-title");
+  const playlistDescElement = document.querySelector(".playlis-description");
   const playlistTypeElement = document.querySelector(".playlist-type");
   const playlistOwnerElement = document.querySelector(".playlist-owner");
   const playlistModalName = document.querySelector("#playlist-modal-name");
@@ -50,6 +51,10 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
           if (playListTitleElement) {
             playListTitleElement.textContent = newPlaylist.name;
             playlistModalName.value = newPlaylist.name;
+          }
+
+          if (playlistDescElement) {
+            playlistDescElement.textContent = newPlaylist.description;
           }
           if (playlistTypeElement) {
             playlistTypeElement.textContent = "Public Playlist";
@@ -89,6 +94,9 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
             playListTitleElement.textContent = data.name;
             playlistModalName.value = data.name;
           }
+          if (playlistDescElement) {
+            playlistDescElement.textContent = data.description;
+          }
           if (playlistTypeElement) {
             playlistTypeElement.textContent = data.is_public
               ? "Public Playlist"
@@ -123,7 +131,6 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
   if (deletePlayListBtn) {
     deletePlayListBtn.addEventListener("click", async (e) => {
       if (!currentActivePlaylistId) {
-        alert("Please select a list of instruments that can be deleted!");
         return;
       }
 
