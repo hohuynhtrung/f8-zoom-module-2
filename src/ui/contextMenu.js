@@ -47,3 +47,49 @@ export function contextMenuArtist(onArtistIdFound) {
     }
   });
 }
+
+export function contextMenuPlaylist(onPlaylistIdFound) {
+  const libraryPlaylist = document.querySelector(".library-playlist");
+  const contextMenu = document.querySelector(".context-menu-playlist");
+
+  if (!libraryPlaylist || !contextMenu) return;
+
+  libraryPlaylist.addEventListener("contextmenu", (e) => {
+    const item = e.target.closest(".library-item");
+    if (!item) return;
+
+    const playlistId = item.dataset.id;
+    if (!playlistId) return;
+
+    e.preventDefault();
+
+    if (typeof onPlaylistIdFound === "function") {
+      onPlaylistIdFound(playlistId);
+    }
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    contextMenu.style.display = "block";
+    contextMenu.style.left = `${mouseX}px`;
+    contextMenu.style.top = `${mouseY}px`;
+
+    window.addEventListener("wheel", preventDefaultScroll, { passive: false }); // Chặn con lăn chuột
+    window.addEventListener("touchmove", preventDefaultScroll, {
+      passive: false,
+    });
+  });
+
+  function unlockScroll() {
+    contextMenu.style.display = "none";
+
+    window.removeEventListener("wheel", preventDefaultScroll);
+    window.removeEventListener("touchmove", preventDefaultScroll);
+  }
+
+  document.addEventListener("click", (e) => {
+    if (!contextMenu.contains(e.target)) {
+      unlockScroll();
+    }
+  });
+}

@@ -44,10 +44,18 @@
           </div>
 
           <div class="library-playlist"></div>
+          <div class="context-menu-playlist">
+            <button class="edit-library-playlist">
+              <i class="fa-solid fa-pen"></i>Edit Detail
+            </button>
+            <button class="delete-library-playlist">
+              <i class="fa-solid fa-circle-minus"></i>Delete
+            </button>
+          </div>
 
           <div class="library-artists"></div>
           <div class="context-menu-artist">
-            <button class="unfollow-artist">
+            <button class="unfollow-library-artist">
               <i class="fa-solid fa-xmark"></i>Unfollow
             </button>
           </div>
@@ -430,13 +438,13 @@
 
         <div class="playlist-modal-footer-row delete-footer">
           <button class="playlist-modal-cancel-btn" id="delete-modal-cancel">
-            Hủy
+            Cancel
           </button>
           <button
             class="playlist-modal-save-btn btn-danger"
             id="delete-modal-confirm"
           >
-            Xóa
+            Delete
           </button>
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function initArtistEvents() {
   });
 
   const contextMenu = document.querySelector(".context-menu-artist");
-  const unfollowBtn = document.querySelector(".unfollow-artist");
+  const unfollowBtn = document.querySelector(".unfollow-library-artist");
 
   if (!artistsGrid) return;
 
@@ -44,7 +44,6 @@ export default function initArtistEvents() {
       renderArtistPopularTracks(popularTracks.tracks);
 
       if (followBtn) {
-        // Kiểm tra xem backend dùng trường nào (artist.is_following hoặc artist.isFollowing)
         const serverFollowStatus =
           artist.is_following === true ||
           artist.is_following === 1 ||
@@ -52,7 +51,7 @@ export default function initArtistEvents() {
 
         followBtn.dataset.following = serverFollowStatus ? "true" : "false";
         followBtn.textContent = serverFollowStatus ? "Following" : "Follow";
-        followBtn.dataset.artistId = artistId; // Gán ID để nút Click biết đang tương tác với ai
+        followBtn.dataset.artistId = artistId;
       }
     } catch (error) {
       console.error(error);
@@ -93,6 +92,8 @@ export default function initArtistEvents() {
       const artistId = item.dataset.id;
       if (!artistId) return;
 
+      currentActiveArtistId = artistId;
+
       const activeItem = libraryArtists.querySelector(".library-item.active");
       if (activeItem) activeItem.classList.remove("active");
       item.classList.add("active");
@@ -110,7 +111,6 @@ export default function initArtistEvents() {
           followBtn.dataset.following = serverFollowingState ? "true" : "false";
           followBtn.textContent = serverFollowingState ? "Following" : "Follow";
 
-          // Đừng quên gán cả artistId vào dataset của nút này để hàm click số 2 lấy đúng ID
           followBtn.dataset.artistId = artistId;
         }
       } catch (error) {

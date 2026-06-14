@@ -6,11 +6,13 @@ import {
 } from "../api/playlistApi.js";
 import { showConfirmDelete } from "../ui/confirmDelete.js";
 import { showHomeContent, showPlayContent } from "../ui/veiws.js";
+import { contextMenuPlaylist } from "../ui/contextMenu.js";
 
 import {
   closeModalPlaylist,
   getIsPublicState,
   setIsPublicState,
+  showModalPlaylist,
 } from "../ui/modalPlaylist.js";
 
 export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
@@ -25,11 +27,21 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
   const playlistOwnerElement = document.querySelector(".playlist-owner");
   const playlistModalName = document.querySelector("#playlist-modal-name");
   const deletePlayListBtn = document.querySelector(".delete-playlist");
+  const deleteLibraryPlaylistBtn = document.querySelector(
+    ".delete-library-playlist",
+  );
+  const editLibraryPlaylistBtn = document.querySelector(
+    ".edit-library-playlist",
+  );
 
   const playlistModalDesc = document.querySelector("#playlist-modal-desc");
   const modalSaveBtn = document.querySelector(".playlist-modal-save-btn");
 
   let currentActivePlaylistId = null;
+  let playlistIdToDelete = null;
+  contextMenuPlaylist((id) => {
+    playlistIdToDelete = id;
+  });
 
   if (createBtn) {
     createBtn.addEventListener("click", async (e) => {
@@ -251,6 +263,113 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
         modalSaveBtn.disabled = false;
         modalSaveBtn.textContent = "Save";
       }
+    });
+  }
+
+  if (editLibraryPlaylistBtn) {
+    editLibraryPlaylistBtn.addEventListener("click", async () => {
+      const targetPlaylistId = playlistIdToDelete || currentActivePlaylistId;
+
+      if (!targetPlaylistId) return;
+
+      try {
+        const res = await getPlaylistById(targetPlaylistId);
+        const data = res?.playlist || res;
+
+        if (data) {
+          if (playlistModalName) playlistModalName.value = data.name || "";
+          if (playlistModalDesc)
+            playlistModalDesc.value = data.description || "";
+
+          const isPublic = data.is_public === 1 || data.is_public === true;
+          setIsPublicState(isPublic);
+          currentActivePlaylistId = targetPlaylistId;
+
+          showModalPlaylist();
+        }
+      } catch (error) {
+        console.error("Error fetching playlist data for editing:", error);
+      } finally {
+        const contextMenu = document.querySelector(".context-menu-playlist");
+        if (contextMenu) contextMenu.style.display = "none";
+        document.body.click();
+      }
+    });
+  }
+
+  if (deleteLibraryPlaylistBtn) {
+    deleteLibraryPlaylistBtn.addEventListener("click", async () => {
+      if (!playlistIdToDelete) return;
+
+      const currentPlaylistName = playListTitleElement
+        ? playListTitleElement.textContent
+        : "this playlist";
+
+      showConfirmDelete({
+        title: "Delete from Your Library?",
+        message: `This will delete ${currentPlaylistName} from Your Library.`,
+        onConfirm: async () => {
+          try {
+            deleteLibraryPlaylistBtn.disabled = true;
+            deleteLibraryPlaylistBtn.textContent = "Deleting...";
+
+            await deletePlaylistById(playlistIdToDelete);
+
+            // Update currentActivePlaylistId if deleting the current displayed playlist
+            if (currentActivePlaylistId === playlistIdToDelete) {
+              currentActivePlaylistId = null;
+            }
+
+            const currentIndex = playlistsArray.findIndex(
+              (p) => p.id === playlistIdToDelete,
+            );
+            const updatedPlaylists = playlistsArray.filter(
+              (p) => p.id !== playlistIdToDelete,
+            );
+            playlistsArray.length = 0;
+            playlistsArray.push(...updatedPlaylists);
+            renderPlaylistFn(playlistsArray);
+
+            // Auto move to previous or next playlist
+            if (currentActivePlaylistId === playlistIdToDelete) {
+              if (playlistsArray.length > 0) {
+                let nextActivePlaylist = null;
+                if (currentIndex > 0) {
+                  nextActivePlaylist = playlistsArray[currentIndex - 1];
+                } else {
+                  nextActivePlaylist = playlistsArray[0];
+                }
+                if (nextActivePlaylist) {
+                  currentActivePlaylistId = nextActivePlaylist.id;
+
+                  setTimeout(() => {
+                    const targetSidebarItem = document.querySelector(
+                      `.library-item[data-id="${nextActivePlaylist.id}"]`,
+                    );
+                    if (targetSidebarItem) {
+                      targetSidebarItem.click();
+                    }
+                  }, 150);
+                }
+              } else {
+                currentActivePlaylistId = null;
+                showHomeContent();
+              }
+            }
+          } catch (error) {
+            console.error("Error delete playlist from context menu:", error);
+          } finally {
+            deleteLibraryPlaylistBtn.disabled = false;
+            deleteLibraryPlaylistBtn.textContent = "Delete";
+            const contextMenu = document.querySelector(
+              ".context-menu-playlist",
+            );
+            if (contextMenu) contextMenu.style.display = "none";
+            document.body.click();
+            playlistIdToDelete = null;
+          }
+        },
+      });
     });
   }
 }
