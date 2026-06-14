@@ -8,12 +8,22 @@ import { renderArtistDetail } from "./renderArtistDetail.js";
 import { renderArtistPopularTracks } from "./renderArtistPopularTracks.js";
 import { showDetailContent } from "../ui/veiws.js";
 import { loadFollowingList } from "./index.js";
+import { contextMenuArtist } from "../ui/contextMenu.js";
 
 export default function initArtistEvents() {
   const artistsGrid = document.querySelector(".artists-grid");
   const followBtn = document.querySelector(".follow-btn");
 
   const libraryArtists = document.querySelector(".library-artists");
+
+  let currentActiveArtistId = null;
+  let artistIdToUnfollow = null;
+  contextMenuArtist((id) => {
+    artistIdToUnfollow = id;
+  });
+
+  const contextMenu = document.querySelector(".context-menu-artist");
+  const unfollowBtn = document.querySelector(".unfollow-artist");
 
   if (!artistsGrid) return;
 
@@ -22,7 +32,7 @@ export default function initArtistEvents() {
     if (!artistCard) return;
 
     const artistId = artistCard.dataset.id;
-
+    currentActiveArtistId = artistId;
     try {
       showDetailContent();
       // artist detail
@@ -32,6 +42,18 @@ export default function initArtistEvents() {
       // popular tracks
       const popularTracks = await fetchArtistPopularTracks(artistId);
       renderArtistPopularTracks(popularTracks.tracks);
+
+      if (followBtn) {
+        // Kiểm tra xem backend dùng trường nào (artist.is_following hoặc artist.isFollowing)
+        const serverFollowStatus =
+          artist.is_following === true ||
+          artist.is_following === 1 ||
+          artist.isFollowing === true;
+
+        followBtn.dataset.following = serverFollowStatus ? "true" : "false";
+        followBtn.textContent = serverFollowStatus ? "Following" : "Follow";
+        followBtn.dataset.artistId = artistId; // Gán ID để nút Click biết đang tương tác với ai
+      }
     } catch (error) {
       console.error(error);
     }
@@ -80,8 +102,47 @@ export default function initArtistEvents() {
         const popularTracks = await fetchArtistPopularTracks(artistId);
         renderArtistDetail(artist);
         renderArtistPopularTracks(popularTracks.tracks);
+        if (followBtn) {
+          const serverFollowingState =
+            artist.is_following === true || artist.is_following === 1;
+
+          // Đồng bộ lại attribute ngầm và chữ hiển thị theo đúng thực tế Database
+          followBtn.dataset.following = serverFollowingState ? "true" : "false";
+          followBtn.textContent = serverFollowingState ? "Following" : "Follow";
+
+          // Đừng quên gán cả artistId vào dataset của nút này để hàm click số 2 lấy đúng ID
+          followBtn.dataset.artistId = artistId;
+        }
       } catch (error) {
         console.error("Error get artist detail", error);
+      }
+    });
+  }
+
+  if (unfollowBtn) {
+    unfollowBtn.addEventListener("click", async () => {
+      if (!artistIdToUnfollow) return;
+
+      try {
+        unfollowBtn.disabled = true;
+        unfollowBtn.textContent = "Unfollowing...";
+
+        await unfollowArtist(artistIdToUnfollow);
+        if (followBtn && currentActiveArtistId === artistIdToUnfollow) {
+          followBtn.dataset.following = "false";
+          followBtn.textContent = "Follow";
+        }
+
+        await loadFollowingList();
+      } catch (error) {
+        console.error("Error unfollow artist via context menu:", error);
+      } finally {
+        unfollowBtn.disabled = false;
+        unfollowBtn.textContent = "Unfollow";
+        if (contextMenu) contextMenu.style.display = "none";
+        window.removeEventListener("wheel", (e) => e.preventDefault());
+        document.body.click();
+        artistIdToUnfollow = null;
       }
     });
   }
