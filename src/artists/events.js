@@ -13,6 +13,8 @@ export default function initArtistEvents() {
   const artistsGrid = document.querySelector(".artists-grid");
   const followBtn = document.querySelector(".follow-btn");
 
+  const libraryArtists = document.querySelector(".library-artists");
+
   if (!artistsGrid) return;
 
   artistsGrid.addEventListener("click", async (e) => {
@@ -57,6 +59,29 @@ export default function initArtistEvents() {
         await loadFollowingList();
       } catch (error) {
         console.error("Error change follow status:", error);
+      }
+    });
+  }
+
+  if (libraryArtists) {
+    libraryArtists.addEventListener("click", async (e) => {
+      const item = e.target.closest(".library-item");
+      if (!item) return;
+
+      const artistId = item.dataset.id;
+      if (!artistId) return;
+
+      const activeItem = libraryArtists.querySelector(".library-item.active");
+      if (activeItem) activeItem.classList.remove("active");
+      item.classList.add("active");
+      showDetailContent();
+      try {
+        const artist = await fetchArtistById(artistId);
+        const popularTracks = await fetchArtistPopularTracks(artistId);
+        renderArtistDetail(artist);
+        renderArtistPopularTracks(popularTracks.tracks);
+      } catch (error) {
+        console.error("Error get artist detail", error);
       }
     });
   }

@@ -18,6 +18,7 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
   const libraryPlaylist = document.querySelector(".library-playlist");
   const choosePhotoBtn = document.querySelector("#choose-photo-btn");
 
+  const playlistImgElement = document.querySelector(".item-icon img");
   const playListTitleElement = document.querySelector(".playlist-title");
   const playlistDescElement = document.querySelector(".playlis-description");
   const playlistTypeElement = document.querySelector(".playlist-type");
