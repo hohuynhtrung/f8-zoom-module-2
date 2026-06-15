@@ -1151,7 +1151,7 @@ button {
   font-size: 1rem;
 }
 
-.search-input {
+.playlist-search-input {
   width: 100%;
   padding: 12px 12px 12px 40px;
   background-color: #2a2a2a;
@@ -1162,11 +1162,11 @@ button {
   outline: none;
 }
 
-.search-input::placeholder {
+.playlist-search-input::placeholder {
   color: #757575;
 }
 
-.search-input:focus {
+.playlist-search-input:focus {
   background-color: #3e3e3e;
 }
 
@@ -1291,8 +1291,8 @@ button {
 }
 
 .progress-bar {
-  flex: 1;
   position: relative;
+  width: 100%;
   height: 4px;
   background-color: #232222;
   border-radius: 2px;
@@ -1301,34 +1301,39 @@ button {
 }
 
 .progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
+  width: 0;
   background-color: var(--text-white);
   border-radius: 2px;
-  position: relative;
   transition: all 0.15s ease;
 }
 
-.progress-handle,
-.volume-handle {
+.progress-handle {
   position: absolute;
-  right: -6px;
+  right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(50%, -50%);
   width: 12px;
   height: 12px;
   background-color: var(--text-white);
   border-radius: 50%;
   opacity: 0;
   transition: all 0.15s ease;
+  display: none;
 }
 
-.progress-bar:hover,
-.volume-bar:hover {
+.progress-container:hover .progress-bar {
   height: 6px;
 }
 
-.progress-bar:hover .progress-handle,
-.volume-bar:hover .volume-handle {
+.progress-container:hover .progress-handle {
+  display: block;
+}
+
+.progress-bar:hover .progress-handle {
   opacity: 1;
 }
 
@@ -1367,20 +1372,47 @@ button {
 
 .volume-bar {
   position: relative;
-  width: 93px;
+  width: 100px;
   height: 4px;
-  background-color: var(--bg-hover);
+  background-color: #4d4d4d;
   border-radius: 2px;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .volume-fill {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
-  background-color: var(--text-white);
+  width: 100%;
+  background-color: #fff;
   border-radius: 2px;
-  transition: all 0.15s ease;
+}
+
+.volume-handle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.volume-control:hover .volume-fill {
+  background-color: #1db954;
+}
+
+.volume-control:hover .volume-handle {
+  display: block;
+}
+
+.active-control i {
+  color: #1db954 !important;
+  text-shadow: 0 0 8px rgba(29, 185, 84, 0.6);
 }
 
 /* Modal Auth */

@@ -9,6 +9,8 @@ import initHits from "./hits/index.js";
 import { showHomeContent, showPlayListNav } from "./ui/veiws.js";
 import initPlaylist from "./playlists/index.js";
 import initModalPlaylist from "./ui/modalPlaylist.js";
+import initHitEvent from "./hits/event.js";
+import { initFooterControls } from "./player/events.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
@@ -26,4 +28,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
   initHits();
   initArtists();
   initPlaylist();
+
+  initHitEvent();
+  initFooterControls();
 });
