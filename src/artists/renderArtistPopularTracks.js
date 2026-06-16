@@ -13,6 +13,7 @@ export function renderArtistPopularTracks(tracks) {
   tracks.forEach((track, index) => {
     const musicItem = document.createElement("div");
     musicItem.className = "music-item";
+    musicItem.dataset.id = track.id;
 
     const musicNumber = document.createElement("div");
     musicNumber.className = "music-number";
@@ -58,5 +59,32 @@ export function renderArtistPopularTracks(tracks) {
     );
 
     musicList.appendChild(musicItem);
+  });
+}
+
+export function updateActiveTrack(currentTrackId) {
+  const musicItems = document.querySelectorAll(".music-item");
+
+  musicItems.forEach((item, index) => {
+    const isActive = item.dataset.id == currentTrackId;
+    item.classList.toggle("active", isActive);
+
+    const numberEl = item.querySelector(".music-number");
+    const menuEl = item.querySelector(".music-menu");
+
+    if (numberEl) {
+      if (isActive) {
+        numberEl.textContent = "";
+        const iconPlay = document.createElement("i");
+        iconPlay.className = "fa-solid fa-volume-high";
+        numberEl.appendChild(iconPlay);
+      } else {
+        numberEl.className = "music-number";
+        numberEl.textContent = index + 1;
+      }
+    }
+    if (menuEl) {
+      menuEl.classList.toggle("active", isActive);
+    }
   });
 }

@@ -5,16 +5,23 @@ import {
   unfollowArtist,
 } from "../api/artistApi.js";
 import { renderArtistDetail } from "./renderArtistDetail.js";
-import { renderArtistPopularTracks } from "./renderArtistPopularTracks.js";
+import {
+  renderArtistPopularTracks,
+  updateActiveTrack,
+} from "./renderArtistPopularTracks.js";
 import { showDetailContent } from "../ui/veiws.js";
 import { loadFollowingList } from "./index.js";
 import { contextMenuArtist } from "../ui/contextMenu.js";
+import { audioPlayer } from "../utils/audioPlayer.js";
+import { playTrackApi } from "../api/hitApi.js";
 
-export default function initArtistEvents() {
+export default function initArtistEvents(currentPopularArray) {
   const artistsGrid = document.querySelector(".artists-grid");
   const followBtn = document.querySelector(".follow-btn");
 
   const libraryArtists = document.querySelector(".library-artists");
+
+  let localPopularTracks = [];
 
   let currentActiveArtistId = null;
   let artistIdToUnfollow = null;
@@ -41,7 +48,8 @@ export default function initArtistEvents() {
 
       // popular tracks
       const popularTracks = await fetchArtistPopularTracks(artistId);
-      renderArtistPopularTracks(popularTracks.tracks);
+      localPopularTracks = popularTracks?.tracks || [];
+      renderArtistPopularTracks(localPopularTracks);
 
       if (followBtn) {
         const serverFollowStatus =
@@ -101,8 +109,9 @@ export default function initArtistEvents() {
       try {
         const artist = await fetchArtistById(artistId);
         const popularTracks = await fetchArtistPopularTracks(artistId);
+        localPopularTracks = popularTracks?.tracks || [];
         renderArtistDetail(artist);
-        renderArtistPopularTracks(popularTracks.tracks);
+        renderArtistPopularTracks(localPopularTracks);
         if (followBtn) {
           const serverFollowingState =
             artist.is_following === true || artist.is_following === 1;
@@ -143,6 +152,54 @@ export default function initArtistEvents() {
         window.removeEventListener("wheel", (e) => e.preventDefault());
         document.body.click();
         artistIdToUnfollow = null;
+      }
+    });
+  }
+
+  const musicList = document.querySelector(".music-list");
+  if (musicList) {
+    musicList.addEventListener("click", async (e) => {
+      const mucsicItem = e.target.closest(".music-item");
+      if (!mucsicItem) return;
+
+      const trackId = mucsicItem.dataset.id;
+      if (!trackId) return;
+
+      const clickedIndex = localPopularTracks.findIndex(
+        (popular) => popular.id == trackId,
+      );
+      if (clickedIndex !== -1) {
+        audioPlayer.setPlaylist(localPopularTracks, clickedIndex);
+      }
+
+      try {
+        const res = await playTrackApi(trackId);
+        const trackData = res?.track || res?.data?.track || res;
+        if (trackData) {
+          const playerImg = document.querySelector(".player-img");
+          const playerTitle = document.querySelector(".player-title");
+          const playerArtist = document.querySelector(".player-artist");
+
+          if (playerImg) {
+            playerImg.src = trackData.image_url || "./placeholder.svg";
+          }
+
+          if (playerTitle) {
+            playerTitle.textContent = trackData.title || "Unknow Title";
+          }
+
+          if (playerArtist) {
+            playerArtist.textContent = trackData.artist_name || "Unknow Aritst";
+          }
+
+          audioPlayer.play(trackData.audio_url);
+          updateActiveTrack(trackId);
+        }
+      } catch (error) {
+        console.error(
+          "Error when processing music playback from Artist Popular",
+          error,
+        );
       }
     });
   }

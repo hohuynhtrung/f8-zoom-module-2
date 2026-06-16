@@ -1,3 +1,5 @@
+import { updateActiveTrack } from "../artists/renderArtistPopularTracks.js";
+
 const globalAudio = new Audio();
 const progressBar = document.querySelector(".progress-bar");
 let isPlayingPromise = null;
@@ -90,6 +92,10 @@ export const audioPlayer = {
       playerArtist.textContent = trackData.artist_name || "Unknown Artist";
 
     this.play(trackData.audio_url);
+
+    if (typeof updateActiveTrack === "function") {
+      updateActiveTrack(trackData.id);
+    }
   },
   toggleShuffle() {
     this.isShuffle = !this.isShuffle;
