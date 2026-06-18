@@ -1235,7 +1235,7 @@ button {
   text-overflow: ellipsis;
 }
 
-.add-btn {
+.like-song-btn {
   width: 20px;
   height: 20px;
   border: 1.5px solid #b3b3b3;
@@ -1246,6 +1246,11 @@ button {
   align-items: center;
   justify-content: center;
   transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.like-song-btn:hover {
+  color: var(--text-white);
 }
 
 /* Player center */
@@ -1425,6 +1430,62 @@ button {
 .active-control i {
   color: #1db954 !important;
   text-shadow: 0 0 8px rgba(29, 185, 84, 0.6);
+}
+
+/* Tooltip */
+/* 1. Thiết lập vùng chứa cho nút để Tooltip căn góc theo nút này */
+[data-tooltip] {
+  position: relative;
+}
+
+/* 2. Tạo phần hộp đen chứa nội dung Tooltip */
+[data-tooltip]::after {
+  content: attr(data-tooltip); /* 🔥 Lấy chữ từ thuộc tính data-tooltip */
+  position: absolute;
+  bottom: 130%; /* Đẩy tooltip nằm lên phía trên nút bấm */
+  left: 50%;
+  transform: translateX(-50%) scale(0.9); /* Căn giữa theo chiều ngang và thu nhỏ nhẹ */
+
+  /* Style giao diện tối giản giống Spotify */
+  background-color: #282828;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap; /* Không cho chữ bị xuống dòng */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  /* Hiệu ứng ẩn/hiện mượt mà */
+  opacity: 0;
+  pointer-events: none; /* Tránh việc chuột hover nhầm vào tooltip gây lỗi giật lắc */
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* 3. Tạo mũi tên nhỏ chĩa xuống dưới (Tùy chọn - nếu thích style Spotify thuần túy thì có thể bỏ qua bước mũi tên này) */
+[data-tooltip]::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #282828 transparent transparent transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+/* 4. Hiệu ứng KHI HOVER CHUỘT VÀO: Hiện tooltip lên và zoom về kích thước chuẩn */
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
 }
 
 /* Modal Auth */

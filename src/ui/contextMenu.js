@@ -2,6 +2,10 @@ function preventDefaultScroll(e) {
   e.preventDefault();
 }
 
+window.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
 export function contextMenuArtist(onArtistIdFound) {
   const libraryArtists = document.querySelector(".library-artists");
   const contextMenu = document.querySelector(".context-menu-artist");

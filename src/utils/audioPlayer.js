@@ -102,6 +102,10 @@ export const audioPlayer = {
     const shuffleBtn = document.querySelector(".shuffle-btn");
     if (shuffleBtn) {
       shuffleBtn.classList.toggle("active-control", this.isShuffle);
+      shuffleBtn.setAttribute(
+        "data-tooltip",
+        this.isShuffle ? "Disable shuffle" : "Enable shuffle",
+      );
     }
   },
   toggleRepeat() {
@@ -109,6 +113,10 @@ export const audioPlayer = {
     const repeatBtn = document.querySelector(".repeat-btn");
     if (repeatBtn) {
       repeatBtn.classList.toggle("active-control", this.isRepeat);
+      repeatBtn.setAttribute(
+        "data-tooltip",
+        this.isRepeat ? "Disable repeat" : "Enable repeat",
+      );
     }
   },
   setVolume(value) {
@@ -117,13 +125,16 @@ export const audioPlayer = {
 };
 
 function updatePlayButtonIcon(isPlaying) {
+  const playBtn = document.querySelector(".js-play-btn");
   const playIcon = document.querySelector(".js-play-btn i");
-  if (!playIcon) return;
+  if (!playIcon || !playBtn) return;
 
   if (isPlaying) {
     playIcon.className = "fa-solid fa-pause";
+    playBtn.setAttribute("data-tooltip", "Pause");
   } else {
     playIcon.className = "fa-solid fa-play";
+    playBtn.setAttribute("data-tooltip", "Play");
   }
 }
 

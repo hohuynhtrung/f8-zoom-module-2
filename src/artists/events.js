@@ -48,7 +48,11 @@ export default function initArtistEvents(currentPopularArray) {
 
       // popular tracks
       const popularTracks = await fetchArtistPopularTracks(artistId);
-      localPopularTracks = popularTracks?.tracks || [];
+      const tracks = popularTracks?.tracks || [];
+      localPopularTracks = tracks.map((track) => ({
+        ...track,
+        artist_name: artist.name || artist.artist_name,
+      }));
       renderArtistPopularTracks(localPopularTracks);
 
       if (followBtn) {
