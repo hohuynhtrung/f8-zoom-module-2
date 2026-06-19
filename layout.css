@@ -71,6 +71,11 @@ button {
   gap: var(--spacing-sm);
 }
 
+/* Footer cao hơn khi hiện auth banner (guest mode) */
+.app-container.is-guest {
+  grid-template-rows: 1fr auto;
+}
+
 .sidebar {
   grid-area: sidebar;
   background-color: var(--bg-sidebar);
@@ -99,11 +104,12 @@ button {
 }
 
 /* sidebar header */
-.sidebar-header .logo i {
+.sidebar-header .logo-spotify i {
   font-size: var(--spacing-xl);
   color: white;
   padding: var(--spacing-md) 0;
   margin-bottom: var(--spacing-md);
+  cursor: pointer;
 }
 
 /* sidebar nav */
@@ -1183,11 +1189,21 @@ button {
 }
 
 /* Footer player */
-.player {
+.footer-player {
   grid-area: player;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-footer-banner.hidden {
+  display: none;
+}
+
+.player-footer-banner {
+  display: block;
   background-color: var(--bg-sidebar);
   border-radius: 0 0 10px 10px;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-sm) var(--spacing-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1432,39 +1448,93 @@ button {
   text-shadow: 0 0 8px rgba(29, 185, 84, 0.6);
 }
 
+/* auth footer banner */
+.auth-footer-banner {
+  display: none;
+  width: 100%;
+  background: linear-gradient(90deg, #ae2896 0%, #509bf5 100%);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 0 0 10px 10px;
+  z-index: 999;
+}
+
+.auth-footer-banner.is-active {
+  display: flex;
+}
+
+.auth-footer-banner__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #ffffff;
+}
+
+.auth-footer-banner__subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.auth-footer-banner__title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.auth-footer-banner__btn {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.1s ease;
+}
+
+.auth-footer-banner__btn:hover {
+  transform: scale(1.04);
+}
+
+.auth-footer-banner__btn:active {
+  transform: scale(0.98);
+}
+
 /* Tooltip */
-/* 1. Thiết lập vùng chứa cho nút để Tooltip căn góc theo nút này */
+/*Thiết lập vùng chứa cho nút để Tooltip căn góc theo nút này */
 [data-tooltip] {
   position: relative;
 }
 
-/* 2. Tạo phần hộp đen chứa nội dung Tooltip */
+/* Tạo phần hộp đen chứa nội dung Tooltip */
 [data-tooltip]::after {
-  content: attr(data-tooltip); /* 🔥 Lấy chữ từ thuộc tính data-tooltip */
+  content: attr(data-tooltip);
   position: absolute;
-  bottom: 130%; /* Đẩy tooltip nằm lên phía trên nút bấm */
+  bottom: 130%;
   left: 50%;
-  transform: translateX(-50%) scale(0.9); /* Căn giữa theo chiều ngang và thu nhỏ nhẹ */
-
-  /* Style giao diện tối giản giống Spotify */
+  transform: translateX(-50%) scale(0.9);
   background-color: #282828;
   color: #ffffff;
   font-size: 12px;
   font-weight: 500;
   padding: 6px 10px;
   border-radius: 4px;
-  white-space: nowrap; /* Không cho chữ bị xuống dòng */
+  white-space: nowrap;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-
-  /* Hiệu ứng ẩn/hiện mượt mà */
   opacity: 0;
-  pointer-events: none; /* Tránh việc chuột hover nhầm vào tooltip gây lỗi giật lắc */
+  pointer-events: none;
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
 }
 
-/* 3. Tạo mũi tên nhỏ chĩa xuống dưới (Tùy chọn - nếu thích style Spotify thuần túy thì có thể bỏ qua bước mũi tên này) */
+/* Tạo mũi tên nhỏ chĩa xuống dưới */
 [data-tooltip]::before {
   content: "";
   position: absolute;
@@ -1481,7 +1551,7 @@ button {
     transform 0.15s ease;
 }
 
-/* 4. Hiệu ứng KHI HOVER CHUỘT VÀO: Hiện tooltip lên và zoom về kích thước chuẩn */
+/*Khi hover vào hiện tooltip lên và zoom về kích thước chuẩn */
 [data-tooltip]:hover::after,
 [data-tooltip]:hover::before {
   opacity: 1;
@@ -1803,4 +1873,96 @@ button {
 .btn-danger:hover {
   background-color: #f15a6b !important;
   transform: scale(1.04);
+}
+
+/* Modal request auth */
+.auth-request__container {
+  background-color: #121212;
+  color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.auth-request__overlay.show .auth-request__container {
+  transform: translateY(0);
+}
+
+.auth-request__icon i {
+  font-size: 48px;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+.auth-request__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.auth-request__description {
+  font-size: 14px;
+  color: #b3b3b3;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.auth-request__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.auth-request__btn {
+  padding: 14px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    background-color 0.2s ease;
+}
+
+.auth-request__btn:active {
+  transform: scale(0.98);
+}
+
+.auth-request__btn--signup {
+  background-color: #1db954;
+  color: #000000;
+}
+
+.auth-request__btn--signup:hover {
+  background-color: #1ed760;
+}
+
+.auth-request__btn--login {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.auth-request__btn--login:hover {
+  background-color: #f6f6f6;
+}
+
+.auth-request__close-btn {
+  background: none;
+  border: none;
+  color: #b3b3b3;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.auth-request__close-btn:hover {
+  color: #ffffff;
 }

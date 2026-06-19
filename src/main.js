@@ -11,6 +11,11 @@ import initPlaylist from "./playlists/index.js";
 import initModalPlaylist from "./ui/modalPlaylist.js";
 import initHitEvent from "./hits/event.js";
 import { initFooterControls } from "./player/events.js";
+import {
+  checkAndRenderAuthComponents,
+  initAuthFooterBanner,
+  showRequestAuth,
+} from "./ui/authView.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
@@ -31,4 +36,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
   initHitEvent();
   initFooterControls();
+
+  initAuthFooterBanner();
+  checkAndRenderAuthComponents();
+  showRequestAuth();
 });

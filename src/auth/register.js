@@ -2,6 +2,7 @@ import { registerApi } from "../api/authApi.js";
 import { saveSession } from "../utils/storage.js";
 import { updateAuthUI } from "./authUI.js";
 import { showToast, showSuccessAndClose } from "../ui/toast.js";
+import { checkAndRenderAuthComponents } from "../ui/authView.js";
 
 export default function register() {
   const form = document.querySelector("#signupForm .auth-form-content");
@@ -19,7 +20,11 @@ export default function register() {
 
       saveSession(res);
       updateAuthUI();
+      checkAndRenderAuthComponents();
       showSuccessAndClose(signupMess, res.message, form);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1200);
     } catch (error) {
       showToast(
         signupMess,

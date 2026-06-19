@@ -3,6 +3,7 @@ const homeContent = document.querySelector(".home-content");
 const detailContent = document.querySelector(".detail-content");
 const playContent = document.querySelector(".playlist-content");
 
+const spotifyBtn = document.querySelector(".logo-spotify");
 const homeBtn = document.querySelector(".home-btn");
 const createBtn = document.querySelector(".create-btn");
 
@@ -11,6 +12,10 @@ const playlistBtn = document.querySelector(".playlist-btn");
 const libPlaylist = document.querySelector(".library-playlist");
 const artistsBtn = document.querySelector(".artists-btn");
 const libArtists = document.querySelector(".library-artists");
+
+spotifyBtn.addEventListener("click", () => {
+  showHomeContent();
+});
 
 homeBtn.addEventListener("click", () => {
   showHomeContent();

@@ -14,6 +14,7 @@ import {
   setIsPublicState,
   showModalPlaylist,
 } from "../ui/modalPlaylist.js";
+import { getAccessToken } from "../utils/storage.js";
 
 export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
   const createBtn = document.querySelector(".create-btn");
@@ -45,7 +46,9 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
 
   if (createBtn) {
     createBtn.addEventListener("click", async (e) => {
-      showPlayContent();
+      const isLogedIn = !!getAccessToken;
+      if (!isLogedIn) return;
+
       try {
         const defaultPayLoad = {
           name: "My New Playlist",
@@ -77,6 +80,7 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
           }
           playlistsArray.unshift(newPlaylist);
           renderPlaylistFn(playlistsArray);
+          showPlayContent();
         }
       } catch (error) {
         console.error("Error init playlist", error);

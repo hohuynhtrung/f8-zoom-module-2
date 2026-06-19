@@ -1,6 +1,7 @@
 import { updateActiveTrack } from "../artists/renderArtistPopularTracks.js";
 
 const globalAudio = new Audio();
+export { globalAudio };
 const progressBar = document.querySelector(".progress-bar");
 let isPlayingPromise = null;
 
