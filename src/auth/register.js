@@ -8,6 +8,8 @@ export default function register() {
   const form = document.querySelector("#signupForm .auth-form-content");
   const signupMess = document.querySelector("#signupMess");
 
+  if (!form) return;
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -26,11 +28,23 @@ export default function register() {
         window.location.reload();
       }, 1200);
     } catch (error) {
-      showToast(
-        signupMess,
-        error?.error?.message || "Registration failed!",
-        false,
-      );
+      const errorData = error?.error || error;
+
+      if (
+        errorData?.code === "VALIDATION_ERROR" &&
+        Array.isArray(errorData?.details)
+      ) {
+        const combinedMessage = errorData.details
+          .map((details) => `${details.message}`)
+          .join("\n");
+        showToast(signupMess, combinedMessage, false);
+      } else {
+        showToast(
+          signupMess,
+          errorData?.message || "Registration failed",
+          false,
+        );
+      }
     }
   });
 }

@@ -39,6 +39,8 @@ export function initAuthFooterBanner() {
 
 export function showRequestAuth() {
   const authRequestModal = document.getElementById("auth-request");
+  const signupBtn = document.querySelector(".auth-request__btn--signup");
+  const loginBtn = document.querySelector(".auth-request__btn--login");
   if (!authRequestModal) return;
 
   document.addEventListener("click", (e) => {
@@ -70,5 +72,15 @@ export function showRequestAuth() {
     if (e.key === "Escape" && authRequestModal.classList.contains("show")) {
       authRequestModal.classList.remove("show");
     }
+  });
+
+  signupBtn.addEventListener("click", () => {
+    document.querySelector(".signup-btn")?.click();
+    authRequestModal.classList.remove("show");
+  });
+
+  loginBtn.addEventListener("click", () => {
+    document.querySelector(".login-btn")?.click();
+    authRequestModal.classList.remove("show");
   });
 }
