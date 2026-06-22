@@ -37,6 +37,7 @@ body {
     "Helvetica Neue",
     sans-serif;
   background-color: var(--bg-primary);
+  user-select: none;
 }
 
 img {
