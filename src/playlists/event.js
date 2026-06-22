@@ -46,7 +46,7 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
 
   if (createBtn) {
     createBtn.addEventListener("click", async (e) => {
-      const isLogedIn = !!getAccessToken;
+      const isLogedIn = !!getAccessToken();
       if (!isLogedIn) return;
 
       try {
@@ -374,6 +374,56 @@ export default function initPlaylistEvents(playlistsArray, renderPlaylistFn) {
           }
         },
       });
+    });
+  }
+
+  const sortBtn = document.querySelector(".sort-btn");
+  const dropdownSort = document.querySelector(".recent-dropdown");
+  const btnGroup = document.querySelector(".btn-recent-drop");
+
+  if (sortBtn && dropdownSort && btnGroup) {
+    btnGroup.addEventListener("click", (e) => {
+      const clickedBtn = e.target.closest("button");
+      if (!clickedBtn) return;
+
+      const currentActive = btnGroup.querySelector("button.is-active");
+      if (currentActive) currentActive.classList.remove("is-active");
+      clickedBtn.classList.add("is-active");
+
+      const selectedText = clickedBtn.textContent.trim();
+      sortBtn.textContent = "";
+
+      const textNode = document.createTextNode(`${selectedText}`);
+      const iconElement = document.createElement("i");
+      iconElement.className = "fa-solid fa-list";
+
+      sortBtn.append(textNode, iconElement);
+
+      let sortedList = [...playlistsArray];
+
+      if (clickedBtn.classList.contains("btn-recent")) {
+        sortedList.sort(
+          (a, b) =>
+            new Date(b.updated_at || b.created_at) -
+            new Date(a.updated_at || a.created_at),
+        );
+      } else if (clickedBtn.classList.contains("btn-recent-add")) {
+        sortedList.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at),
+        );
+      } else if (clickedBtn.classList.contains("btn-alpha")) {
+        sortedList.sort((a, b) =>
+          a.name.toLowerCase().localeCompare(b.name.toLowerCase(), "vi"),
+        );
+      } else if (clickedBtn.classList.contains("btn-create")) {
+        sortedList.sort((a, b) => (b.is_owner || 0) - (a.is_owner || 0));
+      }
+
+      playlistsArray.length = 0;
+      playlistsArray.push(...sortedList);
+      renderPlaylistFn(playlistsArray);
+
+      dropdownSort.classList.remove("show");
     });
   }
 }

@@ -37,10 +37,22 @@
             <button class="search-library-btn">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <button class="sort-btn">
-              Recents
-              <i class="fa-solid fa-list"></i>
-            </button>
+            <div class="sort-component">
+              <button class="sort-btn">
+                Recents
+                <i class="fa-solid fa-list"></i>
+              </button>
+
+              <div class="recent-dropdown">
+                <span class="title-recent-drop">Sort by</span>
+                <div class="btn-recent-drop">
+                  <button class="btn-recent is-active">Recents</button>
+                  <button class="btn-recent-add">Recently Added</button>
+                  <button class="btn-alpha">Alphabetical</button>
+                  <button class="btn-create">Creator</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="library-playlist"></div>

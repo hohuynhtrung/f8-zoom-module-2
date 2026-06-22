@@ -195,20 +195,96 @@ button {
   transform: scale(1.04);
 }
 
-.sort-btn {
-  background: transparent;
-  font-size: 14px;
-  color: var(--text-secondary);
-  border: none;
-  cursor: pointer;
+.sort-component {
+  position: relative;
+  display: inline-block;
 }
 
-.sort-btn:hover {
-  color: var(--text-white);
+/* Nút bấm chính "Recents" */
+.sort-btn {
+  background: transparent;
+  color: #b3b3b3;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 32px;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .sort-btn i {
-  padding-left: 5px;
+  font-size: 16px;
+}
+
+.sort-btn:hover {
+  color: #ffffff;
+  transform: scale(1.04);
+}
+
+/* dropdown recent */
+.recent-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #282828;
+  min-width: 160px;
+  padding: 4px;
+  border-radius: 4px;
+  box-shadow:
+    0 16px 24px rgba(0, 0, 0, 0.3),
+    0 6px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.recent-dropdown.show {
+  display: block;
+}
+
+.title-recent-drop {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #868686;
+  padding: 8px 12px 4px 12px;
+  letter-spacing: 0.5px;
+}
+
+.btn-recent-drop {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-recent-drop button {
+  background: transparent;
+  color: #b3b3b3;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  width: 100%;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-recent-drop button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-white);
+}
+
+.btn-recent-drop button.is-active {
+  color: #1db954;
+  font-weight: 600;
 }
 
 /* library content */

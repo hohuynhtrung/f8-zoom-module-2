@@ -4,17 +4,24 @@ import { renderArtists } from "./renderArtists.js";
 import { renderFollowingArtists } from "./renderFollowingArtists.js";
 import initArtistEvents from "./events.js";
 
+let libraryArtistsArray = [];
+
 export async function loadFollowingList() {
   try {
     const resFollowing = await fetchFollowingArtists();
-    renderFollowingArtists(resFollowing?.artists || []);
+    const artists = resFollowing?.artists || [];
+
+    libraryArtistsArray.length = 0;
+    libraryArtistsArray.push(...artists);
+
+    renderFollowingArtists(libraryArtistsArray);
   } catch (error) {
     console.log("Error loading following list:", error);
   }
 }
 
 export default async function initArtists() {
-  initArtistEvents();
+  initArtistEvents(libraryArtistsArray, renderFollowingArtists);
 
   try {
     const resArtist = await fetchArtists();
